@@ -1,0 +1,75 @@
+<%= stylesheet_link_tag('list_show', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>List: <%=@listName%></h1>
+<h3>
+<hr width="35%" color ="black" align="left" size="1">
+</h3>
+<div class="List Show">
+  <div>
+  <table class="listing" summary="List Detail">
+  <tr class="header">
+  </tr>
+  
+  <%@colNames.each do |field| %>
+  <th><%=field%></th> 
+  <%end %> 
+  
+  <th>Actions</th>
+  </tr>
+  <tr>
+  <%recordID=0%>
+  <%y=0%>
+  <%loop do%>
+      <%y+=1%>
+      <%break if y > @numRecords %>
+      <%x=0%>
+      <%loop do%>
+          <%x+=1%>
+          <%break if x > @numCols %>
+          <td><%=@values[y-1][x-1] %></td>
+          <%if x==1%>
+               <%recordID = @values[y-1][x-1]%>  
+          <%end%>
+      <% end %>
+      <td class="actions">
+      	<%= link_to("Edit",{:controller => "records", :action => 'edit', :id =>@paramID, :name => @listName, :recordID =>recordID }, {:class => 'actions edit'}) %> 
+  	<%= link_to("Copy",{:controller => "records", :action => 'copy', :id =>@paramID, :name => @listName, :recordID =>recordID }, {:class => 'actions copy'}) %> 
+  	<%= link_to("Delete",{:controller => "records", :action => 'delete', :id =>@paramID, :name => @listName, :recordID =>recordID }, {:class => 'actions delete'}) %> 
+      </tr>
+  <% end %>
+  
+  </table>
+  
+  </div>
+  <td class="actions">
+       <%= link_to("Add Record",{:controller => "records", :action => 'new', :name => @listName, :id =>@paramID }, 
+       {:class => 'actions new'}) %>  
+  </tr> </br>
+  </br>
+  <td class="actions">
+        Column:&nbsp&nbsp&nbsp&nbsp <%= link_to("Add",{:controller => "list", :action => 'addColumn', :name => @listName, :id =>@paramID }, 
+         {:class => 'actions new'}) %>  
+  </tr>&nbsp&nbsp&nbsp&nbsp
+  <td class="actions">
+           <%= link_to("Rename",{:controller => "list", :action => 'renameColumns', :name => @listName, :id =>@paramID }, 
+           {:class => 'actions new'}) %>  
+  </tr>&nbsp&nbsp&nbsp&nbsp
+  <td class="actions">
+         <%= link_to("Remove",{:controller => "list", :action => 'deleteColumns', :name => @listName, :id =>@paramID }, 
+         {:class => 'actions new'}) %>  
+  </tr>
+  </br> 
+  </br>
+ <hr width="30%" color = "blue" align="left" size="1">
+ 
+  <td>
+  <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+  </td>
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+

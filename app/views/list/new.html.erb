@@ -1,0 +1,39 @@
+<%= stylesheet_link_tag('list_new', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>Create List</h1>
+<h3>
+<hr width="25%" color ="black" align="left" size="1">
+</h3>
+<div>
+<%= form_for(:list, :url => {:action => 'configure'}) do |f| %>
+  <table summary="Number of fields">
+  <tr class="header">
+  <th>Name of List</th>
+  <td><%= f.text_field(:name) %></td>
+  </tr>
+  <tr>
+    <th>Number of columns</th>
+    <td><%= f.text_field(:numCol) %></td>
+  </tr>
+  </table>
+  
+</div>
+  <div class="form-buttons">
+      <%= submit_tag("Create") %>  
+<%end%>   
+</div>
+</br>
+<hr width="70%" color = "blue" align="left" size="1">
+</br> 
+<td>
+    <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+</td>
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+   
+   

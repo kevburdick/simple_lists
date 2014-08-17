@@ -1,0 +1,42 @@
+<%= stylesheet_link_tag('lists_index', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>Table of Contents</h1>
+<h3>
+<hr width="25%" color ="black" align="left" size="1">
+</h3>
+<div class="List Index">  
+  <div>
+  <table class="listing" summary="List Index">
+  <tr class="header">
+  <th>ID</th>
+  <th>Name</th>
+  <th>Create On</th>
+  <th>Updated On</th>
+  <th>Actions</th>
+  </tr>
+  <%@lists.each do |list| %>
+  <tr>
+  <td><%= list.id %></td>
+  <td><%= list.list_name %></td>
+  <td><%= list.created_at %></td>
+  <td><%= list.updated_at %></td>
+  <td class="actions">
+  	<%= link_to("Show",{:controller =>'list', :action => 'show', :id => list.id, :name =>list.list_name}, {:class => 'actions show'}) %> 
+  	<%= link_to("Delete",{:controller =>'list', :action => 'delete', :id => list.id, :name =>list.list_name}, {:class => 'actions delete'}) %> 
+  </tr>
+  <% end %>
+  </table>
+  </div>
+<hr width="70%" color = "blue" align="left" size="1">
+
+  <br />
+  <%= link_to('Add New List', {:controller =>'list', :action => 'new'}) %> 
+  <br />
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+   

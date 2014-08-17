@@ -1,0 +1,39 @@
+<%= stylesheet_link_tag('add_column', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>Add Column</h1>
+<h3>
+<hr width="25%" color ="black" align="left" size="1">
+</h3>  
+  <%= form_for(:list, :url => {:action => 'createColumn', :name => @listName, :id => @paramID}) do |f| %>
+  <div>
+  <table summary="Fields">
+  
+  <tr>
+  <th>Field Name:</th>
+  <td><%= f.text_field name="colName" %></td>
+  <th>Field Type:</th>
+  <!--<td><%= f.text_field name="type" %></td> -->
+  <td><%= f.select(:"type", options_for_select(['string', 'integer','float','decimal','boolean','date','time','timestamp'],['string']))%></td>
+  </tr>
+  </table>
+  </div>
+  <div class="form-buttons">
+      <%= submit_tag("Add") %>   
+  <%end%>
+  
+  </br> 
+  <hr width="30%" color = "blue" align="left" size="1">
+  </br> 
+
+  <td>
+      <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+  </td>
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+   
+   

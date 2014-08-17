@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag('record_edit', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>Update Record: <%=@listName %></h1>
+<h3>
+<hr width="25%" color ="black" align="left" size="1">
+</h3>  
+<div> 
+<%= form_for(:list, :url => {:action => 'update', :id =>@paramId, :name => @listName, :recordID => @recordID}) do |f| %>
+  <div> 
+  <table summary="Fields">
+  <%@record.columns.each do |column|%>
+      <th><%=column.name%></th>
+  <% end %>
+  </tr>
+  
+  <%@record.columns.each do |column|%>
+        <th><%=column.type%></th>
+    <% end %>
+  </tr>
+  
+  <%x=1%>
+  <%loop do%>
+      <%if x==1 or x==@numCols-1 or x==@numCols%> 
+          <td><%= f.text_field name="names["+x.to_s+"]", value: "#{@values[x-1]}", disabled: true %></td>
+      <%else%>
+          <td><%= f.text_field name="names["+x.to_s+"]", value: "#{@values[x-1]}" %></td>
+      <%end%>
+      <%x+=1%>
+      <%break if x > @numCols %>
+  <% end %>
+  
+  </tr>
+  </table>
+  </div>
+  <div class="form-buttons">
+      <%= submit_tag("Update") %>   
+  <%end%>
+  </div>
+  <hr width="30%" color = "blue" align="left" size="1">
+  <td>
+       <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+  </td>
+  <footer>
+  <%= render 'layouts/copyrightVersion' %>
+  </footer>
+   
+

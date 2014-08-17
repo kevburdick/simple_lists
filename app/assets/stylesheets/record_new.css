@@ -1,0 +1,36 @@
+/* lists_index stylesheet*/
+@import url("base.css");
+
+/* Colors
+red: 		#993120
+green: 		#94B26F
+light greem: 	#B6D491
+yellow: 	#F2DC87
+dark brown: 	#332318
+light brown: 	#4C2516
+*/
+
+html { height: 100%; width: 100%; }
+body { width: 100%; min-width: 980px; height: 100%; margin: 0; padding: 0; 
+       font 14px Verdana,Lucida,Arial,Helvetica,sans-serif; }
+body { background: #FFFFFF; }        
+p, td, ul, ol, li, dl, dt, dd {
+       font-family: Verdana,Lucida,Arial,Helvetica,sans-serif; padding: 10px;}
+h1 { padding: 10px;}
+h2 { color: black; padding: 10px;}
+h3 { margin-left: 10px;}
+
+hr { size:"1"; noshade; }
+img { border: none; }
+div {padding: 10px;}
+table { padding: 5px; border-collapse: collapse;}
+table tr th { color: black; veritical-align: top; text-align: left;
+       padding: 3px; }
+table tr td { color: 0033FF; veritical-align: top; text-align: left;
+       padding: 3px; } 
+table tr th, table tr td { border: 2px solid black; }       
+table th { background: #87CEFA; }
+table td { background: #FFFFFF; font-size: 13px}
+
+
+

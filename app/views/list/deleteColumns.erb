@@ -1,0 +1,51 @@
+<%= stylesheet_link_tag('add_column', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>List: <%=@listName%></h1>
+<h3>
+<hr width="35%" color ="black" align="left" size="1">
+</h3>
+<div class="List Show">
+  <%= form_for(:list, :url => {:action => 'destroyColumns', :name => @listName, :id => @listID}) do |f| %>
+  <div>
+  <table class="listing" summary="List Detail">
+  <tr class="header">
+  </tr>
+  
+  <%@colNames.each do |field| %>
+  <th><%=field%></th> 
+  <%end %> 
+  </tr>
+  <tr>
+  <%x=0%>
+  <%loop do%>
+      <%if x==0 or x==@numCols-2 or x==@numCols-1%> 
+          <td><%= f.check_box name ="names["+x.to_s+"]", disabled: true%></td>
+      <%else%>
+          <td><%= f.check_box name ="names["+x.to_s+"]" %></td>
+      <%end%>
+      <%x+=1%>
+      <%break if x >= @numCols %>
+  <% end %>
+  </table>
+  </div>
+  <div>
+  <%= submit_tag("Remove Columns") %>  
+  <%end%>
+  </div>
+  </tr>
+   
+  <hr width="30%" color = "blue" align="left" size="1"> 
+  </br>
+ 
+ 
+  <td>
+  <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+  </td>
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+   

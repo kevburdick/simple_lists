@@ -1,0 +1,67 @@
+<%= stylesheet_link_tag('list_configure', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>List: <%=@listName%></h1>
+  
+<%= form_for(:list, :url => {:action => 'create', :name => @listName}) do |f| %>
+  <table summary="Fields">  
+  <%x=1%>
+  <%loop do%>
+    <tr>
+    <th>Field Name:</th>
+    <td><%= f.text_field name="names["+x.to_s+"]" %></td>
+    <th>Field Type:</th>
+    <!--<td><%= f.text_field name="types["+x.to_s+"]" %></td> -->
+    <td><%= f.select(:"types[#{x.to_s}]", options_for_select(['string', 'integer','float','decimal','boolean','date','time','timestamp'],['string']))%></td>
+    </tr>
+    <%x+=1%>
+    <%break if x > @numCols %>
+  <% end %>
+  
+  </table>
+  <div class="form-buttons">
+      <%= submit_tag("Create") %>   
+  <%end%>
+  </br> 
+  </br> 
+  
+   <h3> Type Key:</h3>
+   <b> String:</b> Limited to 255 characters (depending on DBMS), Use for short text fields (names, emails, etc) </br>
+   
+   <b>Text*:</b> Unlimited length, Use for comments, blog posts, etc. General rule of thumb: if it's captured via textarea, use Text. 
+   For input using textfields, use string.</br>
+   
+   <b>Integer:</b> Whole numbers </br>
+   
+   <b>Float:</b> Decimal numbers stored with floating point precision, Precision is fixed, which can be problematic for some calculations; 
+   generally no good for math operations due to inaccurate rounding. </br>
+   
+   <b>Decimal:</b> Decimal numbers stored with precision that varies according to what is needed by your calculations; use these for 
+   math that needs to be accurate. See this post for examples and an in-depth explanation on the differences between floats and decimals. </br>
+   
+   <b>Boolean:</b> Use to store true/false attributes (i.e. things that only have two states, like on/off) </br>
+   
+   <b>primary_key*:</b> This datatype is a placeholder that Rails translates into whatever primary key datatype your database of choice. </br>
+   
+   <b>Date:</b> Stores only a date (year, month, day) </br>
+
+   <b>Time:</b> Stores only a time (hours, minutes, seconds) </br>
+   
+   <b>DateTime*:</b> Stores both date and time </br>
+   
+   <b>Timestamp:</b> Stores both date and time. Note: For the purposes of Rails, both Timestamp and DateTime mean the same thing 
+   (use either type to store both date and time).</br>
+   <b>'*' - currently not supported:</b></br>
+  </br> 
+  </br> 
+  <td>
+      <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+  </td>
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+   
+ 

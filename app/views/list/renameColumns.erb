@@ -1,0 +1,37 @@
+<%= stylesheet_link_tag('add_column', :media => 'all') %>
+<head>
+  <title>Simple Lists</title>
+  <%= favicon_link_tag '/list-details.ico' %>
+  <!--http://www.iconarchive.com/show/oxygen-icons-by-oxygen-icons.org/Actions-view-list-details-icon.html-->
+</head>
+<h1>List: <%=@listName%></h1>
+<h3>
+<hr width="35%" color ="black" align="left" size="1">
+</h3>
+<div class="List Show">
+  <%= form_for(:list, :url => {:action => 'updateColumns', :name => @listName, :id => @listID}) do |f| %>
+  <table summary="Fields">
+  <%@list.columns.each do |column| %>
+      <%if column.name.to_s=="id" or column.name.to_s=="created_at" or column.name.to_s=="updated_at"%> 
+         <th><%=f.text_field name = column.name.to_s, value: "#{column.name.to_s}", disabled: true%></th> 
+      <%else%>
+         <th><%=f.text_field name = column.name.to_s, value: "#{column.name.to_s}"%></th> 
+      <%end %>    
+  <%end %> 
+  </table>
+  <div>
+  <%= submit_tag("Rename Columns") %>  
+  </div>
+  </tr>
+  <%end%>
+  
+ <hr width="30%" color = "blue" align="left" size="1">
+ 
+  <td>
+  <%= link_to("Table of Contents",{:controller => "lists", :action => 'index'}) %> 
+  </td>
+<footer>
+<%= render 'layouts/copyrightVersion' %>
+</footer>
+   
+
